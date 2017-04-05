@@ -32,7 +32,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tb_toolbar"
-        android:text="Click to download menu"
+        android:text="Click to download catalog"
         android:gravity="center"
         android:textSize="24sp"
         android:visibility="visible"

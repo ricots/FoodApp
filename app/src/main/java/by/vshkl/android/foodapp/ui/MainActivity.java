@@ -1,7 +1,6 @@
 package by.vshkl.android.foodapp.ui;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
@@ -30,6 +29,18 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
         tvEmpty = (TextView) findViewById(R.id.tv_empty);
 
         tvEmpty.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onStart() {
+        presenter.checkIfCatalogDownloaded();
+        super.onStart();
+    }
+
+    @Override
+    protected void onDestroy() {
+        presenter.onDestroy();
+        super.onDestroy();
     }
 
     @Override
