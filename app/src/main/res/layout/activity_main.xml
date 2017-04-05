@@ -15,6 +15,7 @@
         android:layout_alignParentTop="true"
         android:background="@color/colorPrimary"
         android:elevation="4dp"
+        android:theme="@style/AppTheme.AppBarOverlay"
         />
 
     <FrameLayout
@@ -32,8 +33,8 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tb_toolbar"
-        android:text="Click to download catalog"
         android:gravity="center"
+        android:text="@string/message_empty"
         android:textSize="24sp"
         android:visibility="visible"
         />

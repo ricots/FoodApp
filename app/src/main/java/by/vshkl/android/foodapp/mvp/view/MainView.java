@@ -7,4 +7,8 @@ public interface MainView extends MvpView {
     void showEmpty();
 
     void hideEmpty();
+
+    void showCatalog();
+
+    void showContacts();
 }

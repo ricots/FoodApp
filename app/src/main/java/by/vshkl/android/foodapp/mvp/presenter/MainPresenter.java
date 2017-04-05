@@ -13,6 +13,14 @@ import io.reactivex.functions.Consumer;
 @InjectViewState
 public class MainPresenter extends BasePresenter<MainView> {
 
+    public void showCatalog() {
+
+    }
+
+    public void showContacts() {
+
+    }
+
     public void checkIfCatalogDownloaded() {
         setDisposable(DatabaseRepository.checkIfCatalogDownloaded()
                 .compose(RxUtils.<Boolean>applySchedulers())
@@ -34,7 +42,6 @@ public class MainPresenter extends BasePresenter<MainView> {
                 .subscribe(new Consumer<Catalog>() {
                     @Override
                     public void accept(@NonNull Catalog catalog) throws Exception {
-                        System.out.println(catalog.getShop().getCategories().toString());
                         DatabaseRepository.saveCatalog(catalog)
                                 .compose(RxUtils.<Boolean>applySchedulers())
                                 .subscribe(new Consumer<Boolean>() {
