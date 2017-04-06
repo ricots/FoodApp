@@ -31,6 +31,7 @@ public class MainPresenter extends BasePresenter<MainView> {
                             getViewState().showEmpty();
                         } else {
                             getViewState().hideEmpty();
+                            getViewState().showCatalog();
                         }
                     }
                 }));

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -22,8 +23,9 @@ import by.vshkl.android.foodapp.mvp.model.Category;
 import by.vshkl.android.foodapp.mvp.presenter.CategoriesPresenter;
 import by.vshkl.android.foodapp.mvp.view.CategoriesView;
 import by.vshkl.android.foodapp.ui.adapter.CategoriesAdapter;
+import by.vshkl.android.foodapp.ui.listener.CategoryItemEventListener;
 
-public class CategoriesFragment extends MvpAppCompatFragment implements CategoriesView {
+public class CategoriesFragment extends MvpAppCompatFragment implements CategoriesView, CategoryItemEventListener {
 
     @InjectPresenter CategoriesPresenter presenter;
 
@@ -77,9 +79,15 @@ public class CategoriesFragment extends MvpAppCompatFragment implements Categori
         categoriesAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void onItemClicked(int categoryId) {
+        
+    }
+
     private void initializeRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         categoriesAdapter = new CategoriesAdapter(ContextCompat.getColor(getContext(), R.color.colorIconCategories));
+        categoriesAdapter.setListener(this);
         rvCategories.setLayoutManager(linearLayoutManager);
         rvCategories.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         rvCategories.setAdapter(categoriesAdapter);

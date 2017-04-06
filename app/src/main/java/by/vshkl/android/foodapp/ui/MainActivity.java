@@ -1,8 +1,6 @@
 package by.vshkl.android.foodapp.ui;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,8 +16,8 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import by.vshkl.android.foodapp.R;
 import by.vshkl.android.foodapp.mvp.presenter.MainPresenter;
 import by.vshkl.android.foodapp.mvp.view.MainView;
-import by.vshkl.android.foodapp.ui.fragment.CategoriesFragment;
 import by.vshkl.android.foodapp.util.DrawerUtils;
+import by.vshkl.android.foodapp.util.Navigator;
 
 public class MainActivity extends MvpAppCompatActivity implements MainView, OnClickListener, OnDrawerItemClickListener {
 
@@ -28,7 +26,6 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
     private FrameLayout flFragmentContainer;
     private Toolbar tbToolbar;
     private TextView tvEmpty;
-    private Drawer ndMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,10 +90,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
 
     @Override
     public void showCatalog() {
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        Fragment fragment = CategoriesFragment.newInstance();
-        fragmentTransaction.replace(R.id.fl_fragment_container, fragment, fragment.getTag());
-        fragmentTransaction.commit();
+        Navigator.navigateToCategories(this);
     }
 
     @Override
