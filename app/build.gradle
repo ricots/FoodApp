@@ -55,4 +55,6 @@ dependencies {
     compile('com.mikepenz:materialdrawer:5.8.3@aar') {
         transitive = true
     }
+
+    compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 }

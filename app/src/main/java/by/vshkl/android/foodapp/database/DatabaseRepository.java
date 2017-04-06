@@ -9,12 +9,15 @@ import com.raizlabs.android.dbflow.structure.database.transaction.ITransaction;
 import com.raizlabs.android.dbflow.structure.database.transaction.Transaction;
 
 import java.util.Collection;
+import java.util.List;
 
 import by.vshkl.android.foodapp.database.entity.CategoryEntity;
 import by.vshkl.android.foodapp.database.entity.OfferEntity;
 import by.vshkl.android.foodapp.database.entity.ParamEntity;
 import by.vshkl.android.foodapp.database.mapper.CategoryMapper;
 import by.vshkl.android.foodapp.database.mapper.OfferMapper;
+import by.vshkl.android.foodapp.mvp.mapper.CategoryEntityMapper;
+import by.vshkl.android.foodapp.mvp.model.Category;
 import by.vshkl.android.foodapp.network.model.Catalog;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -65,6 +68,16 @@ public class DatabaseRepository {
                         emitter.onNext(false);
                     }
                 }).build().execute();
+            }
+        });
+    }
+
+    public static Observable<Collection<Category>> loadCategories() {
+        return Observable.create(new ObservableOnSubscribe<Collection<Category>>() {
+            @Override
+            public void subscribe(ObservableEmitter<Collection<Category>> emitter) throws Exception {
+                List<CategoryEntity> categoryEntities = SQLite.select().from(CategoryEntity.class).queryList();
+                emitter.onNext(CategoryEntityMapper.transform(categoryEntities));
             }
         });
     }

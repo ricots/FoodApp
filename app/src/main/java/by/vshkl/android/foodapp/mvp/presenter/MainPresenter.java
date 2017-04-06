@@ -14,11 +14,11 @@ import io.reactivex.functions.Consumer;
 public class MainPresenter extends BasePresenter<MainView> {
 
     public void showCatalog() {
-
+        getViewState().showCatalog();
     }
 
     public void showContacts() {
-
+        getViewState().showContacts();
     }
 
     public void checkIfCatalogDownloaded() {
