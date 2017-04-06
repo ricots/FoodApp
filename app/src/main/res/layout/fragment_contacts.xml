@@ -27,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/fr_contacts_map"
+            android:autoLink="phone|email"
             android:padding="16dp"
             android:text="@string/contacts_info"
             android:textColor="@color/colorPrimaryText"
