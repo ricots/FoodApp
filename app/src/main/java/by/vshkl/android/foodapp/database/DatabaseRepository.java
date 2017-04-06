@@ -88,8 +88,6 @@ public class DatabaseRepository {
     }
 
     public static Observable<Collection<Offer>> loadOffers(final int categoryId) {
-        System.out.println("LoadOffers DatabaseRepository categoryId " + categoryId);
-
         return Observable.create(new ObservableOnSubscribe<Collection<Offer>>() {
             @Override
             public void subscribe(ObservableEmitter<Collection<Offer>> emitter) throws Exception {
@@ -105,6 +103,22 @@ public class DatabaseRepository {
                 }
 
                 emitter.onNext(offers);
+            }
+        });
+    }
+
+    public static Observable<Offer> loadOffer(final int offerId) {
+        return Observable.create(new ObservableOnSubscribe<Offer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Offer> emitter) throws Exception {
+                OfferEntity offerEntity = SQLite.select().from(OfferEntity.class)
+                        .where(OfferEntity_Table.id.eq(offerId)).querySingle();
+
+                if (offerEntity != null) {
+                    List<ParamEntity> paramEntities = SQLite.select().from(ParamEntity.class)
+                            .where(ParamEntity_Table.offerId_id.eq(offerEntity.getId())).queryList();
+                    emitter.onNext(OfferEntityMapper.transform(offerEntity, paramEntities));
+                }
             }
         });
     }

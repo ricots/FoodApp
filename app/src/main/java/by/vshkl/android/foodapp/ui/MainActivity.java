@@ -1,8 +1,6 @@
 package by.vshkl.android.foodapp.ui;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,7 +15,6 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import by.vshkl.android.foodapp.R;
 import by.vshkl.android.foodapp.mvp.presenter.MainPresenter;
 import by.vshkl.android.foodapp.mvp.view.MainView;
-import by.vshkl.android.foodapp.ui.fragment.OffersFragment;
 import by.vshkl.android.foodapp.util.DrawerUtils;
 import by.vshkl.android.foodapp.util.Navigator;
 
@@ -94,6 +91,11 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
     @Override
     public void showOffers(int categoryId) {
         Navigator.navigateToOffers(this, categoryId);
+    }
+
+    @Override
+    public void showOffer(int offerId) {
+        Navigator.navigateToOffer(this, offerId);
     }
 
     @Override

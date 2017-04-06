@@ -1,5 +1,6 @@
 package by.vshkl.android.foodapp.ui.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,6 +21,7 @@ import by.vshkl.android.foodapp.R;
 import by.vshkl.android.foodapp.mvp.model.Offer;
 import by.vshkl.android.foodapp.mvp.presenter.OffersPresenter;
 import by.vshkl.android.foodapp.mvp.view.OffersView;
+import by.vshkl.android.foodapp.ui.MainActivity;
 import by.vshkl.android.foodapp.ui.adapter.OffersAdapter;
 import by.vshkl.android.foodapp.ui.listener.OfferEventListener;
 
@@ -32,6 +34,7 @@ public class OffersFragment extends MvpAppCompatFragment implements OffersView, 
     private RecyclerView rvList;
     private ProgressBar pbProgress;
 
+    private MainActivity parentActivity;
     private OffersAdapter offersAdapter;
     private int categoryId = -1;
 
@@ -41,6 +44,14 @@ public class OffersFragment extends MvpAppCompatFragment implements OffersView, 
         args.putInt(KEY_CATEGORY_ID, categoryId);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof MainActivity) {
+            this.parentActivity = (MainActivity) context;
+        }
     }
 
     @Override
@@ -69,6 +80,7 @@ public class OffersFragment extends MvpAppCompatFragment implements OffersView, 
     @Override
     public void onDetach() {
         presenter.onDestroy();
+        this.parentActivity = null;
         super.onDetach();
     }
 
@@ -92,7 +104,7 @@ public class OffersFragment extends MvpAppCompatFragment implements OffersView, 
 
     @Override
     public void onOfferItemClicked(int offerId) {
-
+        parentActivity.getPresenter().showOffer(offerId);
     }
 
     private void initializeRecyclerView() {
