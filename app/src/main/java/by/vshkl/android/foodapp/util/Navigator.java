@@ -15,8 +15,8 @@ public class Navigator {
         replaceFragment(activity, CategoriesFragment.newInstance(), false);
     }
 
-    public static void navigateToOffers(FragmentActivity activity, int categoryId) {
-        replaceFragment(activity, OffersFragment.newInstance(categoryId), true);
+    public static void navigateToOffers(FragmentActivity activity, int categoryId, String categoryName) {
+        replaceFragment(activity, OffersFragment.newInstance(categoryId, categoryName), true);
     }
 
     public static void navigateToOffer(FragmentActivity activity, int offerId) {

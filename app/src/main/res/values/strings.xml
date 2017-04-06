@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">FoodApp</string>
 
-    <string name="message_empty">Click here to download catalog.</string>
+    <string name="message_empty">Нажмите, чтобы скачать каталог блюд.</string>
 
-    <string name="nav_catalog">Catalog</string>
-    <string name="nav_contacts">Contacts</string>
+    <string name="nav_catalog">Каталог</string>
+    <string name="nav_contacts">Контакты</string>
+
+    <string name="template_description">Описание:\n%1$s</string>
+    <string name="template_weight">Вес: %1$s</string>
+    <string name="template_price">Цена: %1$s руб.</string>
+
 </resources>

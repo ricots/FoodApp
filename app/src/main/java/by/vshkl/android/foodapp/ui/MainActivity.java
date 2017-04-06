@@ -89,8 +89,8 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
     }
 
     @Override
-    public void showOffers(int categoryId) {
-        Navigator.navigateToOffers(this, categoryId);
+    public void showOffers(int categoryId, String categoryName) {
+        Navigator.navigateToOffers(this, categoryId, categoryName);
     }
 
     @Override
@@ -105,5 +105,9 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
 
     public MainPresenter getPresenter() {
         return presenter;
+    }
+
+    public void setTitle(String title) {
+        getSupportActionBar().setTitle(title);
     }
 }

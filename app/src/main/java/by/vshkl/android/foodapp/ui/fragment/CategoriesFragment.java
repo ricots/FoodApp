@@ -51,7 +51,6 @@ public class CategoriesFragment extends MvpAppCompatFragment implements Categori
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         return inflater.inflate(R.layout.fragment_list, container, false);
     }
 
@@ -61,6 +60,7 @@ public class CategoriesFragment extends MvpAppCompatFragment implements Categori
         rvList = (RecyclerView) view.findViewById(R.id.rv_list);
         pbProgress = (ProgressBar) view.findViewById(R.id.pb_progress);
         initializeRecyclerView();
+        parentActivity.setTitle(getString(R.string.nav_catalog));
         presenter.loadCategories();
     }
 
@@ -90,8 +90,8 @@ public class CategoriesFragment extends MvpAppCompatFragment implements Categori
     }
 
     @Override
-    public void onCategoryItemClicked(int categoryId) {
-        parentActivity.getPresenter().showOffers(categoryId);
+    public void onCategoryItemClicked(int categoryId, String categoryName) {
+        parentActivity.getPresenter().showOffers(categoryId, categoryName);
     }
 
     private void initializeRecyclerView() {

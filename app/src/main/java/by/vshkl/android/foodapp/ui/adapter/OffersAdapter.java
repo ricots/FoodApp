@@ -49,7 +49,7 @@ public class OffersAdapter extends Adapter<OffersViewHolder> {
                 .error(R.drawable.ic_image)
                 .into(holder.ivOfferIcon);
         holder.tvOfferTitle.setText(offer.getName());
-        holder.tvOfferPrice.setText(offer.getPrice());
+        holder.tvOfferPrice.setText(holder.tvOfferPrice.getContext().getString(R.string.template_price, offer.getPrice()));
         holder.rlOfferRoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

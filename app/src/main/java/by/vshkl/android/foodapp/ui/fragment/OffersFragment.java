@@ -28,6 +28,7 @@ import by.vshkl.android.foodapp.ui.listener.OfferEventListener;
 public class OffersFragment extends MvpAppCompatFragment implements OffersView, OfferEventListener {
 
     private static final String KEY_CATEGORY_ID = "OffersFragment.KEY_CATEGORY_ID";
+    private static final String KEY_CATEGORY_NAME = "OffersFragment.KEY_CATEGORY_NAME";
 
     @InjectPresenter OffersPresenter presenter;
 
@@ -36,12 +37,14 @@ public class OffersFragment extends MvpAppCompatFragment implements OffersView, 
 
     private MainActivity parentActivity;
     private OffersAdapter offersAdapter;
-    private int categoryId = -1;
+    private int categoryId;
+    private String categoryName ;
 
-    public static Fragment newInstance(int categoryId) {
+    public static Fragment newInstance(int categoryId, String categoryName) {
         Fragment fragment = new OffersFragment();
         Bundle args = new Bundle();
         args.putInt(KEY_CATEGORY_ID, categoryId);
+        args.putString(KEY_CATEGORY_NAME, categoryName);
         fragment.setArguments(args);
         return fragment;
     }
@@ -58,6 +61,7 @@ public class OffersFragment extends MvpAppCompatFragment implements OffersView, 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         categoryId = getArguments().getInt(KEY_CATEGORY_ID, -1);
+        categoryName = getArguments().getString(KEY_CATEGORY_NAME, "");
     }
 
     @Nullable
@@ -72,6 +76,7 @@ public class OffersFragment extends MvpAppCompatFragment implements OffersView, 
         rvList = (RecyclerView) view.findViewById(R.id.rv_list);
         pbProgress = (ProgressBar) view.findViewById(R.id.pb_progress);
         initializeRecyclerView();
+        parentActivity.setTitle(categoryName);
         if (categoryId >= 0) {
             presenter.loadOffers(categoryId);
         }
