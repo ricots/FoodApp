@@ -25,6 +25,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
 
     private FrameLayout flFragmentContainer;
     private LinearLayout llEmpty;
+    private LinearLayout llProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
         flFragmentContainer = (FrameLayout) findViewById(R.id.fl_fragment_container);
         MarqueeToolbar tbToolbar = (MarqueeToolbar) findViewById(R.id.tb_toolbar);
         llEmpty = (LinearLayout) findViewById(R.id.ll_empty);
+        llProgress = (LinearLayout) findViewById(R.id.ll_progress);
 
         setSupportActionBar(tbToolbar);
 
@@ -85,6 +87,16 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
     public void hideEmpty() {
         llEmpty.setVisibility(View.GONE);
         flFragmentContainer.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showProgress() {
+        llProgress.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        llProgress.setVisibility(View.GONE);
     }
 
     @Override

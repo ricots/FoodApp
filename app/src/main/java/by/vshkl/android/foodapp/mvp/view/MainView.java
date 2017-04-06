@@ -8,6 +8,10 @@ public interface MainView extends MvpView {
 
     void hideEmpty();
 
+    void showProgress();
+
+    void hideProgress();
+
     void showMessage(int messageId);
 
     void showCatalog();

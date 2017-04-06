@@ -2,6 +2,7 @@
     <string name="app_name">FoodApp</string>
 
     <string name="message_empty">Нажмите, чтобы скачать каталог блюд.</string>
+    <string name="message_downloading">Подождите, пока каталог скачается.</string>
 
     <string name="nav_catalog">Каталог</string>
     <string name="nav_contacts">Контакты</string>

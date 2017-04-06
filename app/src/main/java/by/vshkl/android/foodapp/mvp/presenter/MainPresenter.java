@@ -47,6 +47,8 @@ public class MainPresenter extends BasePresenter<MainView> {
     }
 
     public void downloadCatalog() {
+        getViewState().hideEmpty();
+        getViewState().showProgress();
         setDisposable(ApiClient.getFoodApi().getFood()
                 .compose(RxUtils.<Catalog>applySchedulers())
                 .subscribe(new Consumer<Catalog>() {
@@ -58,7 +60,7 @@ public class MainPresenter extends BasePresenter<MainView> {
                                     @Override
                                     public void accept(@NonNull Boolean aBoolean) throws Exception {
                                         if (aBoolean) {
-                                            getViewState().hideEmpty();
+                                            getViewState().hideProgress();
                                             getViewState().showCatalog();
                                             getViewState().showMessage(R.string.message_catalog_downloaded);
                                         }
