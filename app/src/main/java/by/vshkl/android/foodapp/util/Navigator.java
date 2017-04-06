@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import by.vshkl.android.foodapp.R;
@@ -48,10 +49,15 @@ public class Navigator {
     }
 
     private static void replaceFragment(FragmentActivity activity, Fragment fragment, boolean addToBackStack) {
-        FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
+        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fl_fragment_container, fragment, fragment.getTag());
         if (addToBackStack) {
             fragmentTransaction.addToBackStack(fragment.getTag());
+        } else {
+            for (int i = 0; i < fragmentManager.getBackStackEntryCount(); i++) {
+                fragmentManager.popBackStack();
+            }
         }
         fragmentTransaction.commit();
     }

@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -34,9 +35,10 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
         flFragmentContainer = (FrameLayout) findViewById(R.id.fl_fragment_container);
         tbToolbar = (MarqueeToolbar) findViewById(R.id.tb_toolbar);
         tvEmpty = (TextView) findViewById(R.id.tv_empty);
-        DrawerUtils.initializeDrawer(this, tbToolbar, this);
 
         setSupportActionBar(tbToolbar);
+
+        DrawerUtils.initializeDrawer(this, tbToolbar, this, savedInstanceState);
 
         tvEmpty.setOnClickListener(this);
 
@@ -53,7 +55,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_empty:
-                presenter.downloadMenu();
+                presenter.downloadCatalog();
                 break;
         }
     }
@@ -66,6 +68,9 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
                 break;
             case 2:
                 presenter.showContacts();
+                break;
+            case -1:
+                presenter.updateCatalog();
                 break;
         }
         return false;
@@ -81,6 +86,11 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
     public void hideEmpty() {
         tvEmpty.setVisibility(View.GONE);
         flFragmentContainer.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showMessage(int messageId) {
+        Toast.makeText(this, getString(messageId), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -101,6 +111,11 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
     @Override
     public void showContacts() {
         Navigator.navigateToContacts(this);
+    }
+
+    @Override
+    public void updateCatalog() {
+        presenter.updateCatalog();
     }
 
     public MainPresenter getPresenter() {

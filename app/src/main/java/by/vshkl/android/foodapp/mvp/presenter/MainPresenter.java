@@ -2,6 +2,7 @@ package by.vshkl.android.foodapp.mvp.presenter;
 
 import com.arellomobile.mvp.InjectViewState;
 
+import by.vshkl.android.foodapp.R;
 import by.vshkl.android.foodapp.database.DatabaseRepository;
 import by.vshkl.android.foodapp.mvp.view.MainView;
 import by.vshkl.android.foodapp.network.ApiClient;
@@ -45,7 +46,7 @@ public class MainPresenter extends BasePresenter<MainView> {
                 }));
     }
 
-    public void downloadMenu() {
+    public void downloadCatalog() {
         setDisposable(ApiClient.getFoodApi().getFood()
                 .compose(RxUtils.<Catalog>applySchedulers())
                 .subscribe(new Consumer<Catalog>() {
@@ -58,9 +59,24 @@ public class MainPresenter extends BasePresenter<MainView> {
                                     public void accept(@NonNull Boolean aBoolean) throws Exception {
                                         if (aBoolean) {
                                             getViewState().hideEmpty();
+                                            getViewState().showCatalog();
+                                            getViewState().showMessage(R.string.message_catalog_downloaded);
                                         }
                                     }
                                 });
+                    }
+                }));
+    }
+
+    public void updateCatalog() {
+        setDisposable(DatabaseRepository.deleteTables()
+                .compose(RxUtils.<Boolean>applySchedulers())
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(@NonNull Boolean aBoolean) throws Exception {
+                        if (aBoolean) {
+                            downloadCatalog();
+                        }
                     }
                 }));
     }

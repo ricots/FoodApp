@@ -5,6 +5,7 @@
 
     <string name="nav_catalog">Каталог</string>
     <string name="nav_contacts">Контакты</string>
+    <string name="nav_update_catalog">Обновить каталог</string>
 
     <string name="template_description">Описание:\n%1$s</string>
     <string name="template_weight">Вес: %1$s</string>
@@ -25,5 +26,7 @@
     <string name="location_message">Для продолжения необходимо включить службу определения местоположения.</string>
     <string name="location_ok">Включить</string>
     <string name="location_cancel">Отменить</string>
+
+    <string name="message_catalog_downloaded">Каталог скачан</string>
 
 </resources>

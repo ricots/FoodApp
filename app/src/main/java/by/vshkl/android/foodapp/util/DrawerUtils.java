@@ -1,5 +1,6 @@
 package by.vshkl.android.foodapp.util;
 
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -13,9 +14,10 @@ import by.vshkl.android.foodapp.R;
 public class DrawerUtils {
 
     public static Drawer initializeDrawer(AppCompatActivity activity, Toolbar toolbar,
-                                          OnDrawerItemClickListener listener) {
+                                          OnDrawerItemClickListener listener, Bundle savedInstanceState) {
         return new DrawerBuilder()
                 .withActivity(activity)
+                .withSavedInstance(savedInstanceState)
                 .withHeader(R.layout.drawer_header)
                 .withToolbar(toolbar)
                 .addDrawerItems(
@@ -25,6 +27,10 @@ public class DrawerUtils {
                         new PrimaryDrawerItem()
                                 .withName(R.string.nav_contacts)
                                 .withIcon(R.drawable.ic_contacts))
+                .addStickyDrawerItems(
+                        new PrimaryDrawerItem()
+                                .withName(R.string.nav_update_catalog)
+                                .withIcon(R.drawable.ic_refresh))
                 .withOnDrawerItemClickListener(listener)
                 .build();
     }

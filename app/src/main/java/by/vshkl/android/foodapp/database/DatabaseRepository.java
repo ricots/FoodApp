@@ -3,6 +3,7 @@ package by.vshkl.android.foodapp.database;
 import android.support.v4.util.Pair;
 
 import com.raizlabs.android.dbflow.config.FlowManager;
+import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
 import com.raizlabs.android.dbflow.structure.database.transaction.ITransaction;
@@ -34,10 +35,7 @@ public class DatabaseRepository {
         return Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override
             public void subscribe(ObservableEmitter<Boolean> emitter) throws Exception {
-                long categories = SQLite.selectCountOf().from(CategoryEntity.class).count();
-                long offers = SQLite.selectCountOf().from(OfferEntity.class).count();
-                long params = SQLite.selectCountOf().from(ParamEntity.class).count();
-                emitter.onNext(categories > 0 && offers > 0 && params > 0);
+                emitter.onNext(isCatalogDownloaded());
             }
         });
     }
@@ -121,5 +119,22 @@ public class DatabaseRepository {
                 }
             }
         });
+    }
+
+    public static Observable<Boolean> deleteTables() {
+        return Observable.create(new ObservableOnSubscribe<Boolean>() {
+            @Override
+            public void subscribe(ObservableEmitter<Boolean> emitter) throws Exception {
+                Delete.tables(ParamEntity.class, OfferEntity.class, CategoryEntity.class);
+                emitter.onNext(!isCatalogDownloaded());
+            }
+        });
+    }
+
+    private static boolean isCatalogDownloaded() {
+        long categories = SQLite.selectCountOf().from(CategoryEntity.class).count();
+        long offers = SQLite.selectCountOf().from(OfferEntity.class).count();
+        long params = SQLite.selectCountOf().from(ParamEntity.class).count();
+        return categories > 0 && offers > 0 && params > 0;
     }
 }
