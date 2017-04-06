@@ -1,7 +1,6 @@
 package by.vshkl.android.foodapp.ui;
 
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
@@ -101,7 +100,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
 
     @Override
     public void showContacts() {
-
+        Navigator.navigateToContacts(this);
     }
 
     public MainPresenter getPresenter() {

@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 
 import by.vshkl.android.foodapp.R;
 import by.vshkl.android.foodapp.ui.fragment.CategoriesFragment;
+import by.vshkl.android.foodapp.ui.fragment.ContactsFragment;
 import by.vshkl.android.foodapp.ui.fragment.OfferDetailsFragment;
 import by.vshkl.android.foodapp.ui.fragment.OffersFragment;
 
@@ -21,6 +22,10 @@ public class Navigator {
 
     public static void navigateToOffer(FragmentActivity activity, int offerId) {
         replaceFragment(activity, OfferDetailsFragment.newInstance(offerId), true);
+    }
+
+    public static void navigateToContacts(FragmentActivity activity) {
+        replaceFragment(activity, ContactsFragment.newInstance(), false);
     }
 
     private static void replaceFragment(FragmentActivity activity, Fragment fragment, boolean addToBackStack) {

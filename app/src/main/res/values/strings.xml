@@ -10,5 +10,9 @@
     <string name="template_weight">Вес: %1$s</string>
     <string name="template_price_short">%1$s руб.</string>
     <string name="template_price">Цена: %1$s руб.</string>
+    <string name="template_address">Адрес:\n%1$s</string>
+    <string name="template_phones">Телефон:\n%1$s</string>
+
+    <string name="contacts_info">Адрес:\nГород, ул. Уличная, д. 42\n\nТелефон:\n+1–917 555–13–37\n+1–917 555–23–37\n+1–917 555–33–37\n\nE-mail:\ninfo@foodapp.com</string>
 
 </resources>

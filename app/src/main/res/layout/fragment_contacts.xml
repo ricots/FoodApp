@@ -1,10 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sv_contacts_root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     >
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
 
+        <fragment
+            android:id="@+id/fr_contacts_map"
+            class="by.vshkl.android.foodapp.ui.view.ScrollViewMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            map:mapType="normal"
+            />
 
-</RelativeLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fb_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_margin="8dp"
+            app:fabSize="normal"
+            app:layout_anchor="@id/fr_contacts_map"
+            app:layout_anchorGravity="bottom|end"
+            app:srcCompat="@drawable/ic_my_location"
+            />
+
+        <by.vshkl.android.foodapp.ui.view.RobotoRegularTextView
+            android:id="@+id/tv_contacts_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fr_contacts_map"
+            android:padding="16dp"
+            android:text="@string/contacts_info"
+            android:textColor="@color/colorPrimaryText"
+            android:textSize="18sp"
+            />
+
+    </RelativeLayout>
+
+</ScrollView>
