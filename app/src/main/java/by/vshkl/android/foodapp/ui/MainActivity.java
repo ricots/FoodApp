@@ -15,6 +15,7 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import by.vshkl.android.foodapp.R;
 import by.vshkl.android.foodapp.mvp.presenter.MainPresenter;
 import by.vshkl.android.foodapp.mvp.view.MainView;
+import by.vshkl.android.foodapp.ui.view.MarqueeToolbar;
 import by.vshkl.android.foodapp.util.DrawerUtils;
 import by.vshkl.android.foodapp.util.Navigator;
 
@@ -23,7 +24,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
     @InjectPresenter MainPresenter presenter;
 
     private FrameLayout flFragmentContainer;
-    private Toolbar tbToolbar;
+    private MarqueeToolbar tbToolbar;
     private TextView tvEmpty;
 
     @Override
@@ -32,7 +33,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
         setContentView(R.layout.activity_main);
 
         flFragmentContainer = (FrameLayout) findViewById(R.id.fl_fragment_container);
-        tbToolbar = (Toolbar) findViewById(R.id.tb_toolbar);
+        tbToolbar = (MarqueeToolbar) findViewById(R.id.tb_toolbar);
         tvEmpty = (TextView) findViewById(R.id.tv_empty);
         DrawerUtils.initializeDrawer(this, tbToolbar, this);
 

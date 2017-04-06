@@ -7,7 +7,7 @@
     tools:context="by.vshkl.android.foodapp.ui.MainActivity"
     >
 
-    <android.support.v7.widget.Toolbar
+    <by.vshkl.android.foodapp.ui.view.MarqueeToolbar
         android:id="@+id/tb_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"

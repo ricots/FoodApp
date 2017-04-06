@@ -8,13 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.squareup.picasso.Picasso;
-
-import java.util.stream.Stream;
 
 import by.vshkl.android.foodapp.R;
 import by.vshkl.android.foodapp.mvp.model.Offer;
@@ -23,6 +20,7 @@ import by.vshkl.android.foodapp.mvp.presenter.OfferDetailsPresenter;
 import by.vshkl.android.foodapp.mvp.view.OfferDetailsView;
 import by.vshkl.android.foodapp.ui.MainActivity;
 import by.vshkl.android.foodapp.ui.view.AspectRatioImageView;
+import by.vshkl.android.foodapp.ui.view.RobotoRegularTextView;
 
 public class OfferDetailsFragment extends MvpAppCompatFragment implements OfferDetailsView {
 
@@ -32,9 +30,9 @@ public class OfferDetailsFragment extends MvpAppCompatFragment implements OfferD
 
     private ProgressBar pbProgress;
     private AspectRatioImageView ivOfferImage;
-    private TextView tvOfferDescription;
-    private TextView tvOfferWeight;
-    private TextView tvOfferPrice;
+    private RobotoRegularTextView tvOfferDescription;
+    private RobotoRegularTextView tvOfferWeight;
+    private RobotoRegularTextView tvOfferPrice;
 
     private MainActivity parentActivity;
     private int offerId = -1;
@@ -72,9 +70,9 @@ public class OfferDetailsFragment extends MvpAppCompatFragment implements OfferD
         super.onViewCreated(view, savedInstanceState);
         pbProgress = (ProgressBar) view.findViewById(R.id.pb_progress);
         ivOfferImage = (AspectRatioImageView) view.findViewById(R.id.iv_offer_image);
-        tvOfferDescription = (TextView) view.findViewById(R.id.tv_offer_description);
-        tvOfferWeight = (TextView) view.findViewById(R.id.tv_offer_weight);
-        tvOfferPrice = (TextView) view.findViewById(R.id.tv_offer_price);
+        tvOfferDescription = (RobotoRegularTextView) view.findViewById(R.id.tv_offer_description);
+        tvOfferWeight = (RobotoRegularTextView) view.findViewById(R.id.tv_offer_weight);
+        tvOfferPrice = (RobotoRegularTextView) view.findViewById(R.id.tv_offer_price);
         if (offerId >= 0) {
             presenter.loadOffer(offerId);
         }

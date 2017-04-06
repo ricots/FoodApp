@@ -17,7 +17,7 @@
         tools:visibility="visible"
         />
 
-    <TextView
+    <by.vshkl.android.foodapp.ui.view.RobotoRegularTextView
         android:id="@+id/tv_offer_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,13 +25,14 @@
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
         android:paddingTop="16dp"
+        android:textColor="@color/colorPrimaryText"
         android:textSize="18sp"
         android:visibility="gone"
         tools:text="Описание:\nЭто новый прорыв от доставки удовольствий Фарфор. Мы знаем как много битв и споров вокруг того какую пиццу заказать на доставку. Мы решили сократить эту проблему ровно на половину. Заказывайте через конструктор пиццы двойные пиццы. Два вкуса в одной пицце!"
         tools:visibility="visible"
         />
 
-    <TextView
+    <by.vshkl.android.foodapp.ui.view.RobotoRegularTextView
         android:id="@+id/tv_offer_weight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,13 +40,14 @@
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
         android:paddingTop="16dp"
+        android:textColor="@color/colorPrimaryText"
         android:textSize="18sp"
         android:visibility="gone"
         tools:text="Вес: 590 гр."
         tools:visibility="visible"
         />
 
-    <TextView
+    <by.vshkl.android.foodapp.ui.view.RobotoRegularTextView
         android:id="@+id/tv_offer_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,6 +55,7 @@
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
         android:paddingTop="16dp"
+        android:textColor="@color/colorPrimaryText"
         android:textSize="18sp"
         android:visibility="gone"
         tools:text="Цена: 1337 руб."

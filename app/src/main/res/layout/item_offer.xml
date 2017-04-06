@@ -22,7 +22,7 @@
         tools:src="@mipmap/ic_launcher"
         />
 
-    <TextView
+    <by.vshkl.android.foodapp.ui.view.RobotoRegularTextView
         android:id="@+id/tv_offer_title"
         android:layout_width="match_parent"
         android:layout_height="32dp"
@@ -32,11 +32,12 @@
         android:ellipsize="marquee"
         android:gravity="center_vertical"
         android:lines="1"
+        android:textColor="@color/colorPrimaryText"
         android:textSize="20sp"
         tools:text="Маффин шоколадный"
         />
 
-    <TextView
+    <by.vshkl.android.foodapp.ui.view.RobotoMediumTextView
         android:id="@+id/tv_offer_weight"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
@@ -44,17 +45,19 @@
         android:layout_marginStart="16dp"
         android:layout_toEndOf="@+id/iv_offer_icon"
         android:gravity="center_vertical"
+        android:textColor="@color/colorSecondaryText"
         android:textSize="16sp"
         tools:text="95.00 гр"
         />
 
-    <TextView
+    <by.vshkl.android.foodapp.ui.view.RobotoMediumTextView
         android:id="@+id/tv_offer_price"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:gravity="center_vertical"
+        android:textColor="@color/colorSecondaryText"
         android:textSize="16sp"
         tools:ignore="RelativeOverlap"
         tools:text="50 руб"

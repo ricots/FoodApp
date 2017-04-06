@@ -8,4 +8,7 @@
     <color name="colorIconCategories">#8D6E63</color>
 
     <color name="colorDivider">#BDBDBD</color>
+
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#757575</color>
 </resources>

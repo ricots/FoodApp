@@ -5,9 +5,9 @@
     android:id="@+id/fl_category_root"
     android:layout_width="match_parent"
     android:layout_height="56dp"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp"
     android:background="@android:color/white"
+    android:paddingEnd="16dp"
+    android:paddingStart="16dp"
     >
 
     <ImageView
@@ -19,7 +19,7 @@
         tools:src="@mipmap/ic_launcher_round"
         />
 
-    <TextView
+    <by.vshkl.android.foodapp.ui.view.RobotoRegularTextView
         android:id="@+id/tv_category_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,6 +27,7 @@
         android:layout_marginStart="56dp"
         android:ellipsize="end"
         android:lines="1"
+        android:textColor="@color/colorPrimaryText"
         android:textSize="20sp"
         tools:text="Морепродукты"
         />
