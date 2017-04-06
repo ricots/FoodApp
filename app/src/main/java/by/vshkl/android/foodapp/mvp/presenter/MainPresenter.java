@@ -17,6 +17,10 @@ public class MainPresenter extends BasePresenter<MainView> {
         getViewState().showCatalog();
     }
 
+    public void showOffers(int categoryId) {
+        getViewState().showOffers(categoryId);
+    }
+
     public void showContacts() {
         getViewState().showContacts();
     }

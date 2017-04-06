@@ -1,10 +1,8 @@
 package by.vshkl.android.foodapp.ui.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,39 +17,41 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import java.util.Collection;
 
 import by.vshkl.android.foodapp.R;
-import by.vshkl.android.foodapp.mvp.model.Category;
-import by.vshkl.android.foodapp.mvp.presenter.CategoriesPresenter;
-import by.vshkl.android.foodapp.mvp.view.CategoriesView;
-import by.vshkl.android.foodapp.ui.MainActivity;
-import by.vshkl.android.foodapp.ui.adapter.CategoriesAdapter;
-import by.vshkl.android.foodapp.ui.listener.CategoryItemEventListener;
+import by.vshkl.android.foodapp.mvp.model.Offer;
+import by.vshkl.android.foodapp.mvp.presenter.OffersPresenter;
+import by.vshkl.android.foodapp.mvp.view.OffersView;
+import by.vshkl.android.foodapp.ui.adapter.OffersAdapter;
+import by.vshkl.android.foodapp.ui.listener.OfferEventListener;
 
-public class CategoriesFragment extends MvpAppCompatFragment implements CategoriesView, CategoryItemEventListener {
+public class OffersFragment extends MvpAppCompatFragment implements OffersView, OfferEventListener {
 
-    @InjectPresenter CategoriesPresenter presenter;
+    private static final String KEY_CATEGORY_ID = "OffersFragment.KEY_CATEGORY_ID";
+
+    @InjectPresenter OffersPresenter presenter;
 
     private RecyclerView rvList;
     private ProgressBar pbProgress;
 
-    private MainActivity parentActivity;
-    private CategoriesAdapter categoriesAdapter;
+    private OffersAdapter offersAdapter;
+    private int categoryId = -1;
 
-    public static Fragment newInstance() {
-        return new CategoriesFragment();
+    public static Fragment newInstance(int categoryId) {
+        Fragment fragment = new OffersFragment();
+        Bundle args = new Bundle();
+        args.putInt(KEY_CATEGORY_ID, categoryId);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof MainActivity) {
-            this.parentActivity = (MainActivity) context;
-        }
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        categoryId = getArguments().getInt(KEY_CATEGORY_ID, -1);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         return inflater.inflate(R.layout.fragment_list, container, false);
     }
 
@@ -61,13 +61,14 @@ public class CategoriesFragment extends MvpAppCompatFragment implements Categori
         rvList = (RecyclerView) view.findViewById(R.id.rv_list);
         pbProgress = (ProgressBar) view.findViewById(R.id.pb_progress);
         initializeRecyclerView();
-        presenter.loadCategories();
+        if (categoryId >= 0) {
+            presenter.loadOffers(categoryId);
+        }
     }
 
     @Override
     public void onDetach() {
         presenter.onDestroy();
-        this.parentActivity = null;
         super.onDetach();
     }
 
@@ -84,22 +85,22 @@ public class CategoriesFragment extends MvpAppCompatFragment implements Categori
     }
 
     @Override
-    public void showCategories(Collection<Category> categories) {
-        categoriesAdapter.setCategories(categories);
-        categoriesAdapter.notifyDataSetChanged();
+    public void showOffers(Collection<Offer> offers) {
+        offersAdapter.setOffers(offers);
+        offersAdapter.notifyDataSetChanged();
     }
 
     @Override
-    public void onCategoryItemClicked(int categoryId) {
-        parentActivity.getPresenter().showOffers(categoryId);
+    public void onOfferItemClicked(int offerId) {
+
     }
 
     private void initializeRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        categoriesAdapter = new CategoriesAdapter(ContextCompat.getColor(getContext(), R.color.colorIconCategories));
-        categoriesAdapter.setListener(this);
+        offersAdapter = new OffersAdapter();
+        offersAdapter.setListener(this);
         rvList.setLayoutManager(linearLayoutManager);
         rvList.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-        rvList.setAdapter(categoriesAdapter);
+        rvList.setAdapter(offersAdapter);
     }
 }

@@ -43,7 +43,7 @@ public class CategoriesAdapter extends Adapter<CategoriesViewHolder> {
             @Override
             public void onClick(View v) {
                 if (listener != null) {
-                    listener.onItemClicked(category.getId());
+                    listener.onCategoryItemClicked(category.getId());
                 }
             }
         });

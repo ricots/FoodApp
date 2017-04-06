@@ -8,16 +8,21 @@ import com.raizlabs.android.dbflow.structure.database.DatabaseWrapper;
 import com.raizlabs.android.dbflow.structure.database.transaction.ITransaction;
 import com.raizlabs.android.dbflow.structure.database.transaction.Transaction;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import by.vshkl.android.foodapp.database.entity.CategoryEntity;
 import by.vshkl.android.foodapp.database.entity.OfferEntity;
+import by.vshkl.android.foodapp.database.entity.OfferEntity_Table;
 import by.vshkl.android.foodapp.database.entity.ParamEntity;
+import by.vshkl.android.foodapp.database.entity.ParamEntity_Table;
 import by.vshkl.android.foodapp.database.mapper.CategoryMapper;
 import by.vshkl.android.foodapp.database.mapper.OfferMapper;
 import by.vshkl.android.foodapp.mvp.mapper.CategoryEntityMapper;
+import by.vshkl.android.foodapp.mvp.mapper.OfferEntityMapper;
 import by.vshkl.android.foodapp.mvp.model.Category;
+import by.vshkl.android.foodapp.mvp.model.Offer;
 import by.vshkl.android.foodapp.network.model.Catalog;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -78,6 +83,28 @@ public class DatabaseRepository {
             public void subscribe(ObservableEmitter<Collection<Category>> emitter) throws Exception {
                 List<CategoryEntity> categoryEntities = SQLite.select().from(CategoryEntity.class).queryList();
                 emitter.onNext(CategoryEntityMapper.transform(categoryEntities));
+            }
+        });
+    }
+
+    public static Observable<Collection<Offer>> loadOffers(final int categoryId) {
+        System.out.println("LoadOffers DatabaseRepository categoryId " + categoryId);
+
+        return Observable.create(new ObservableOnSubscribe<Collection<Offer>>() {
+            @Override
+            public void subscribe(ObservableEmitter<Collection<Offer>> emitter) throws Exception {
+                List<OfferEntity> offerEntities = SQLite.select().from(OfferEntity.class)
+                        .where(OfferEntity_Table.categoryId_id.eq(categoryId)).queryList();
+
+                List<Offer> offers = new ArrayList<>(offerEntities.size());
+
+                for (OfferEntity offerEntity : offerEntities) {
+                    List<ParamEntity> paramEntities = SQLite.select().from(ParamEntity.class)
+                            .where(ParamEntity_Table.offerId_id.eq(offerEntity.getId())).queryList();
+                    offers.add(OfferEntityMapper.transform(offerEntity, paramEntities));
+                }
+
+                emitter.onNext(offers);
             }
         });
     }
