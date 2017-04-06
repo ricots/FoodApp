@@ -95,10 +95,9 @@ public class CategoriesFragment extends MvpAppCompatFragment implements Categori
     }
 
     private void initializeRecyclerView() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         categoriesAdapter = new CategoriesAdapter(ContextCompat.getColor(getContext(), R.color.colorIconCategories));
         categoriesAdapter.setListener(this);
-        rvList.setLayoutManager(linearLayoutManager);
+        rvList.setLayoutManager(new LinearLayoutManager(getContext()));
         rvList.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         rvList.setAdapter(categoriesAdapter);
     }

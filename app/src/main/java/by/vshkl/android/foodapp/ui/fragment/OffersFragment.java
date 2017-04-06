@@ -96,10 +96,9 @@ public class OffersFragment extends MvpAppCompatFragment implements OffersView, 
     }
 
     private void initializeRecyclerView() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         offersAdapter = new OffersAdapter();
         offersAdapter.setListener(this);
-        rvList.setLayoutManager(linearLayoutManager);
+        rvList.setLayoutManager(new LinearLayoutManager(getContext()));
         rvList.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         rvList.setAdapter(offersAdapter);
     }

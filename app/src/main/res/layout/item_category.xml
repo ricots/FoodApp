@@ -4,15 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fl_category_root"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="56dp"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:background="@android:color/white"
     >
 
     <ImageView
         android:id="@+id/iv_category_icon"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_gravity="start|top"
-        android:padding="8dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="start|center_vertical"
         tools:ignore="ContentDescription"
         tools:src="@mipmap/ic_launcher_round"
         />
@@ -25,9 +27,7 @@
         android:layout_marginStart="56dp"
         android:ellipsize="end"
         android:lines="1"
-        android:paddingEnd="8dp"
-        android:paddingStart="8dp"
-        android:textSize="18sp"
+        android:textSize="20sp"
         tools:text="Морепродукты"
         />
 
