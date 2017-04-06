@@ -8,12 +8,16 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
 import android.widget.ScrollView;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
@@ -30,7 +34,7 @@ import com.google.android.gms.maps.model.Marker;
 
 import by.vshkl.android.foodapp.R;
 import by.vshkl.android.foodapp.mvp.view.ContactsView;
-import by.vshkl.android.foodapp.ui.view.RobotoRegularTextView;
+import by.vshkl.android.foodapp.ui.MainActivity;
 import by.vshkl.android.foodapp.ui.view.ScrollViewMapFragment;
 import by.vshkl.android.foodapp.util.DialogUtils;
 import by.vshkl.android.foodapp.util.Navigator;
@@ -45,13 +49,23 @@ public class ContactsFragment extends MvpAppCompatFragment implements ContactsVi
         OnMapReadyCallback, OnMarkerClickListener {
 
     private ScrollView svContactsRoot;
-    private RobotoRegularTextView tvContactsInfo;
+    private RelativeLayout rvContainer;
 
+    private MainActivity parentActivity;
     private GoogleMap googleMap;
     private GoogleApiClient googleApiClient;
+    private boolean firstConnect = true;
 
     public static Fragment newInstance() {
         return new ContactsFragment();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof MainActivity) {
+            this.parentActivity = (MainActivity) context;
+        }
     }
 
     @Nullable
@@ -64,9 +78,11 @@ public class ContactsFragment extends MvpAppCompatFragment implements ContactsVi
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         svContactsRoot = (ScrollView) view.findViewById(R.id.sv_contacts_root);
-        tvContactsInfo = (RobotoRegularTextView) view.findViewById(R.id.tv_contacts_info);
+        rvContainer = (RelativeLayout) view.findViewById(R.id.rv_container);
+        parentActivity.setTitle(R.string.nav_contacts);
         initializeGoogleMap();
         initializeGoogleApiClient();
+        initializeFloatingActionButton();
     }
 
     @Override
@@ -83,6 +99,7 @@ public class ContactsFragment extends MvpAppCompatFragment implements ContactsVi
 
     @Override
     public void onDetach() {
+        this.parentActivity = null;
         super.onDetach();
     }
 
@@ -94,7 +111,10 @@ public class ContactsFragment extends MvpAppCompatFragment implements ContactsVi
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        showUserLocation();
+        if (firstConnect) {
+            firstConnect = false;
+            showUserLocation();
+        }
     }
 
     @Override
@@ -106,7 +126,6 @@ public class ContactsFragment extends MvpAppCompatFragment implements ContactsVi
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
         setupMap();
-        ContactsFragmentPermissionsDispatcher.updateCoordinatesWithCheck(this);
     }
 
     @Override
@@ -134,7 +153,7 @@ public class ContactsFragment extends MvpAppCompatFragment implements ContactsVi
     @OnPermissionDenied({Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION})
     void onDeniedForLocation() {
         Snackbar.make(svContactsRoot, R.string.permission_denied_message, Snackbar.LENGTH_LONG)
-                .setAction(R.string.permission_settings, new View.OnClickListener() {
+                .setAction(R.string.permission_settings, new OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Navigator.navigateToAppSettings(getContext());
@@ -160,6 +179,29 @@ public class ContactsFragment extends MvpAppCompatFragment implements ContactsVi
                     .addConnectionCallbacks(this)
                     .addApi(LocationServices.API).build();
         }
+    }
+
+    private void initializeFloatingActionButton() {
+        int density = (int) getContext().getResources().getDisplayMetrics().density;
+        int width = getContext().getResources().getDisplayMetrics().widthPixels;
+        int fabX = width - density * 72;
+        int fabY = width - density * 28;
+
+        LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(fabX, fabY, 0, 0);
+
+        FloatingActionButton fabLocation = new FloatingActionButton(getContext());
+        fabLocation.setSize(FloatingActionButton.SIZE_NORMAL);
+        fabLocation.setImageResource(R.drawable.ic_my_location);
+        fabLocation.setLayoutParams(layoutParams);
+        fabLocation.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ContactsFragmentPermissionsDispatcher.updateCoordinatesWithCheck(ContactsFragment.this);
+            }
+        });
+
+        rvContainer.addView(fabLocation);
     }
 
     private void setupMap() {
