@@ -29,14 +29,17 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import by.vshkl.android.foodapp.R;
 import by.vshkl.android.foodapp.mvp.view.ContactsView;
 import by.vshkl.android.foodapp.ui.MainActivity;
 import by.vshkl.android.foodapp.ui.view.ScrollViewMapFragment;
 import by.vshkl.android.foodapp.util.DialogUtils;
+import by.vshkl.android.foodapp.util.DummyCoordinateUtils;
 import by.vshkl.android.foodapp.util.Navigator;
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.OnPermissionDenied;
@@ -71,6 +74,7 @@ public class ContactsFragment extends MvpAppCompatFragment implements ContactsVi
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        parentActivity.setTitle(getString(R.string.nav_contacts));
         return inflater.inflate(R.layout.fragment_contacts, container, false);
     }
 
@@ -79,7 +83,6 @@ public class ContactsFragment extends MvpAppCompatFragment implements ContactsVi
         super.onViewCreated(view, savedInstanceState);
         svContactsRoot = (ScrollView) view.findViewById(R.id.sv_contacts_root);
         rvContainer = (RelativeLayout) view.findViewById(R.id.rv_container);
-        parentActivity.setTitle(R.string.nav_contacts);
         initializeGoogleMap();
         initializeGoogleApiClient();
         initializeFloatingActionButton();
@@ -209,8 +212,13 @@ public class ContactsFragment extends MvpAppCompatFragment implements ContactsVi
         settings.setCompassEnabled(false);
         settings.setMyLocationButtonEnabled(false);
         settings.setMapToolbarEnabled(false);
+
         googleMap.setBuildingsEnabled(true);
         googleMap.setOnMarkerClickListener(this);
+        for (LatLng latLng : DummyCoordinateUtils.getDummyCoordinates()) {
+            googleMap.addMarker(new MarkerOptions().position(latLng)
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_restaurant)));
+        }
     }
 
     private void showUserLocation() {
