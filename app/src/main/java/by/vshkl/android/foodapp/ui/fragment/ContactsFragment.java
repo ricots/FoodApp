@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -133,7 +134,8 @@ public class ContactsFragment extends MvpAppCompatFragment implements ContactsVi
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        return false;
+        Toast.makeText(parentActivity, marker.getPosition().toString(), Toast.LENGTH_SHORT).show();
+        return true;
     }
 
     @NeedsPermission({Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION})
