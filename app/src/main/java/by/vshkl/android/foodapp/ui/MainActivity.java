@@ -1,5 +1,6 @@
 package by.vshkl.android.foodapp.ui;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -108,21 +109,25 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
 
     @Override
     public void showCatalog() {
+        lockScreenOrientation(false);
         Navigator.navigateToCategories(this);
     }
 
     @Override
     public void showOffers(int categoryId, String categoryName) {
+        lockScreenOrientation(false);
         Navigator.navigateToOffers(this, categoryId, categoryName);
     }
 
     @Override
     public void showOffer(int offerId) {
+        lockScreenOrientation(false);
         Navigator.navigateToOffer(this, offerId);
     }
 
     @Override
     public void showContacts() {
+        lockScreenOrientation(true);
         Navigator.navigateToContacts(this);
     }
 
@@ -137,5 +142,13 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
 
     public void setTitle(String title) {
         getSupportActionBar().setTitle(title);
+    }
+
+    private void lockScreenOrientation(boolean shouldLock) {
+        if (shouldLock) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+        }
     }
 }
