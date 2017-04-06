@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
@@ -24,8 +24,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
     @InjectPresenter MainPresenter presenter;
 
     private FrameLayout flFragmentContainer;
-    private MarqueeToolbar tbToolbar;
-    private TextView tvEmpty;
+    private LinearLayout llEmpty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +32,14 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
         setContentView(R.layout.activity_main);
 
         flFragmentContainer = (FrameLayout) findViewById(R.id.fl_fragment_container);
-        tbToolbar = (MarqueeToolbar) findViewById(R.id.tb_toolbar);
-        tvEmpty = (TextView) findViewById(R.id.tv_empty);
+        MarqueeToolbar tbToolbar = (MarqueeToolbar) findViewById(R.id.tb_toolbar);
+        llEmpty = (LinearLayout) findViewById(R.id.ll_empty);
 
         setSupportActionBar(tbToolbar);
 
         DrawerUtils.initializeDrawer(this, tbToolbar, this, savedInstanceState);
 
-        tvEmpty.setOnClickListener(this);
+        llEmpty.setOnClickListener(this);
 
         presenter.checkIfCatalogDownloaded();
     }
@@ -54,7 +53,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.tv_empty:
+            case R.id.ll_empty:
                 presenter.downloadCatalog();
                 break;
         }
@@ -79,12 +78,12 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
     @Override
     public void showEmpty() {
         flFragmentContainer.setVisibility(View.GONE);
-        tvEmpty.setVisibility(View.VISIBLE);
+        llEmpty.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideEmpty() {
-        tvEmpty.setVisibility(View.GONE);
+        llEmpty.setVisibility(View.GONE);
         flFragmentContainer.setVisibility(View.VISIBLE);
     }
 
