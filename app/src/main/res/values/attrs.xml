@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AspectRatioImageView">
+        <attr name="aspectRatio" format="enum">
+            <enum name="wide" value="0"/>
+            <enum name="square" value="1"/>
+        </attr>
+    </declare-styleable>
+</resources>
