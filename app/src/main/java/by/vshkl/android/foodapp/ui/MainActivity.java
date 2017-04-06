@@ -91,12 +91,14 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
 
     @Override
     public void showProgress() {
+        flFragmentContainer.setVisibility(View.GONE);
         llProgress.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgress() {
         llProgress.setVisibility(View.GONE);
+        flFragmentContainer.setVisibility(View.VISIBLE);
     }
 
     @Override
