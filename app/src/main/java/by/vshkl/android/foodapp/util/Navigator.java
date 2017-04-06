@@ -1,5 +1,9 @@
 package by.vshkl.android.foodapp.util;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -11,6 +15,21 @@ import by.vshkl.android.foodapp.ui.fragment.OfferDetailsFragment;
 import by.vshkl.android.foodapp.ui.fragment.OffersFragment;
 
 public class Navigator {
+
+    public static void navigateToAppSettings(Context context) {
+        final Intent intent = new Intent();
+        intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.setData(Uri.parse("package:" + context.getPackageName()));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+        context.startActivity(intent);
+    }
+
+    public static void navigateToLocationSettings(Context context) {
+        context.startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+    }
 
     public static void navigateToCategories(FragmentActivity activity) {
         replaceFragment(activity, CategoriesFragment.newInstance(), false);
