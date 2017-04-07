@@ -22,6 +22,7 @@
 
         <activity
             android:name=".ui.activity.SplashScreenActivity"
+            android:noHistory="true"
             android:theme="@style/AppTheme.NoActionBar.SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
