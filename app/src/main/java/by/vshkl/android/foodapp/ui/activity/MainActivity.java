@@ -141,7 +141,11 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
 
     @Override
     public void updateCatalog() {
-        presenter.updateCatalog();
+        if (!NetworkUtils.hasNetworkConnection(this)) {
+            DialogUtils.showNetworkTurnOnDialog(this);
+        } else {
+            presenter.updateCatalog();
+        }
     }
 
     public static Intent newIntent(Context context) {
