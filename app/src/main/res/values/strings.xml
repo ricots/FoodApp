@@ -28,6 +28,10 @@
     <string name="location_ok">Включить</string>
     <string name="location_cancel">Отменить</string>
 
+    <string name="network_title">Соединение с интернетом</string>
+    <string name="network_message">Для скачивания каталога необходимо включить соединение с интернетом.</string>
+    <string name="network_ok">Ясно</string>
+
     <string name="message_catalog_downloaded">Каталог скачан</string>
 
 </resources>

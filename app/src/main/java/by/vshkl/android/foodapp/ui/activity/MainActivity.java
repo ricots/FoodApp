@@ -19,8 +19,10 @@ import by.vshkl.android.foodapp.R;
 import by.vshkl.android.foodapp.mvp.presenter.MainPresenter;
 import by.vshkl.android.foodapp.mvp.view.MainView;
 import by.vshkl.android.foodapp.ui.view.MarqueeToolbar;
+import by.vshkl.android.foodapp.util.DialogUtils;
 import by.vshkl.android.foodapp.util.DrawerUtils;
 import by.vshkl.android.foodapp.util.Navigator;
+import by.vshkl.android.foodapp.util.NetworkUtils;
 
 public class MainActivity extends MvpAppCompatActivity implements MainView, OnClickListener, OnDrawerItemClickListener {
 
@@ -59,7 +61,11 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_empty:
-                presenter.downloadCatalog();
+                if (!NetworkUtils.hasNetworkConnection(this)) {
+                    DialogUtils.showNetworkTurnOnDialog(this);
+                } else {
+                    presenter.downloadCatalog();
+                }
                 break;
         }
     }
