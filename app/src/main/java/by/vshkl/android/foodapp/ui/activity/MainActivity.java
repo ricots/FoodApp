@@ -80,7 +80,11 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
                 presenter.showContacts();
                 break;
             case -1:
-                presenter.updateCatalog();
+                if (!NetworkUtils.hasNetworkConnection(this)) {
+                    DialogUtils.showNetworkTurnOnDialog(this);
+                } else {
+                    presenter.updateCatalog();
+                }
                 break;
         }
         return false;
@@ -137,15 +141,6 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
     public void showContacts() {
         lockScreenOrientation(true);
         Navigator.navigateToContacts(this);
-    }
-
-    @Override
-    public void updateCatalog() {
-        if (!NetworkUtils.hasNetworkConnection(this)) {
-            DialogUtils.showNetworkTurnOnDialog(this);
-        } else {
-            presenter.updateCatalog();
-        }
     }
 
     public static Intent newIntent(Context context) {

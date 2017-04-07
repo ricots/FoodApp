@@ -21,6 +21,4 @@ public interface MainView extends MvpView {
     void showOffer(int offerId);
 
     void showContacts();
-
-    void updateCatalog();
 }
