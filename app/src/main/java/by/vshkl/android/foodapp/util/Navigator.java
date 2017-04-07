@@ -33,24 +33,28 @@ public class Navigator {
     }
 
     public static void navigateToCategories(FragmentActivity activity) {
-        replaceFragment(activity, CategoriesFragment.newInstance(), false);
+        replaceFragment(activity, CategoriesFragment.newInstance(), false, false);
     }
 
     public static void navigateToOffers(FragmentActivity activity, int categoryId, String categoryName) {
-        replaceFragment(activity, OffersFragment.newInstance(categoryId, categoryName), true);
+        replaceFragment(activity, OffersFragment.newInstance(categoryId, categoryName), true, true);
     }
 
     public static void navigateToOffer(FragmentActivity activity, int offerId) {
-        replaceFragment(activity, OfferDetailsFragment.newInstance(offerId), true);
+        replaceFragment(activity, OfferDetailsFragment.newInstance(offerId), true, true);
     }
 
     public static void navigateToContacts(FragmentActivity activity) {
-        replaceFragment(activity, ContactsFragment.newInstance(), false);
+        replaceFragment(activity, ContactsFragment.newInstance(), false, false);
     }
 
-    private static void replaceFragment(FragmentActivity activity, Fragment fragment, boolean addToBackStack) {
+    private static void replaceFragment(FragmentActivity activity, Fragment fragment, boolean addToBackStack,
+                                        boolean animate) {
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        if (animate) {
+            fragmentTransaction.setCustomAnimations(R.anim.enter_from_right, 0, R.anim.enter_from_left, 0);
+        }
         fragmentTransaction.replace(R.id.fl_fragment_container, fragment, fragment.getTag());
         if (addToBackStack) {
             fragmentTransaction.addToBackStack(fragment.getTag());
