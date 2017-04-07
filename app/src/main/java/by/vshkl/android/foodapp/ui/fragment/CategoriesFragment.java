@@ -22,7 +22,7 @@ import by.vshkl.android.foodapp.R;
 import by.vshkl.android.foodapp.mvp.model.Category;
 import by.vshkl.android.foodapp.mvp.presenter.CategoriesPresenter;
 import by.vshkl.android.foodapp.mvp.view.CategoriesView;
-import by.vshkl.android.foodapp.ui.MainActivity;
+import by.vshkl.android.foodapp.ui.activity.MainActivity;
 import by.vshkl.android.foodapp.ui.adapter.CategoriesAdapter;
 import by.vshkl.android.foodapp.ui.listener.CategoryItemEventListener;
 

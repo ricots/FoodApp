@@ -18,7 +18,7 @@ import by.vshkl.android.foodapp.mvp.model.Offer;
 import by.vshkl.android.foodapp.mvp.model.Param;
 import by.vshkl.android.foodapp.mvp.presenter.OfferDetailsPresenter;
 import by.vshkl.android.foodapp.mvp.view.OfferDetailsView;
-import by.vshkl.android.foodapp.ui.MainActivity;
+import by.vshkl.android.foodapp.ui.activity.MainActivity;
 import by.vshkl.android.foodapp.ui.view.AspectRatioImageView;
 import by.vshkl.android.foodapp.ui.view.RobotoRegularTextView;
 

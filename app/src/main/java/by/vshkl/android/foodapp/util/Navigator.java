@@ -10,12 +10,17 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import by.vshkl.android.foodapp.R;
+import by.vshkl.android.foodapp.ui.activity.MainActivity;
 import by.vshkl.android.foodapp.ui.fragment.CategoriesFragment;
 import by.vshkl.android.foodapp.ui.fragment.ContactsFragment;
 import by.vshkl.android.foodapp.ui.fragment.OfferDetailsFragment;
 import by.vshkl.android.foodapp.ui.fragment.OffersFragment;
 
 public class Navigator {
+
+    public static void navigatrToMainActivity(Context context) {
+        context.startActivity(MainActivity.newIntent(context));
+    }
 
     public static void navigateToAppSettings(Context context) {
         final Intent intent = new Intent();

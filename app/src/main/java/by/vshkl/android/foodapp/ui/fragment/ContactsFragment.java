@@ -37,7 +37,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import by.vshkl.android.foodapp.R;
 import by.vshkl.android.foodapp.mvp.view.ContactsView;
-import by.vshkl.android.foodapp.ui.MainActivity;
+import by.vshkl.android.foodapp.ui.activity.MainActivity;
 import by.vshkl.android.foodapp.ui.view.ScrollViewMapFragment;
 import by.vshkl.android.foodapp.util.DialogUtils;
 import by.vshkl.android.foodapp.util.DummyCoordinateUtils;

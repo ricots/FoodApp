@@ -21,7 +21,7 @@ import by.vshkl.android.foodapp.R;
 import by.vshkl.android.foodapp.mvp.model.Offer;
 import by.vshkl.android.foodapp.mvp.presenter.OffersPresenter;
 import by.vshkl.android.foodapp.mvp.view.OffersView;
-import by.vshkl.android.foodapp.ui.MainActivity;
+import by.vshkl.android.foodapp.ui.activity.MainActivity;
 import by.vshkl.android.foodapp.ui.adapter.OffersAdapter;
 import by.vshkl.android.foodapp.ui.listener.OfferEventListener;
 

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="by.vshkl.android.foodapp.ui.MainActivity"
+    tools:context="by.vshkl.android.foodapp.ui.activity.MainActivity"
     >
 
     <by.vshkl.android.foodapp.ui.view.MarqueeToolbar

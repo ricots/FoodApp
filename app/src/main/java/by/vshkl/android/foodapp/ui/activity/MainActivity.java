@@ -1,5 +1,7 @@
-package by.vshkl.android.foodapp.ui;
+package by.vshkl.android.foodapp.ui.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
@@ -134,6 +136,10 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, OnCl
     @Override
     public void updateCatalog() {
         presenter.updateCatalog();
+    }
+
+    public static Intent newIntent(Context context) {
+        return new Intent(context, MainActivity.class);
     }
 
     public MainPresenter getPresenter() {
